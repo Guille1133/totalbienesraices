@@ -932,9 +932,29 @@
                 padding: 25px;
             }
         }
-    </style>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.17/build/css/intlTelInput.min.css">
 
+        /* Nuevos estilos para el selector de país y código */
+        .phone-input-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .country-select {
+            flex: 0 0 120px;
+            margin-right: 10px;
+        }
+
+        .phone-input {
+            flex: 1;
+        }
+
+        .country-flag {
+            width: 20px;
+            height: 15px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+    </style>
 </head>
 <body>
     <!-- Header con navegación -->
@@ -1007,14 +1027,17 @@
                                 <label for="email">Email</label>
                                 <input type="email" id="email" name="email" class="form-control" required>
                             </div>
-                            
-<div class="form-group">
-  <label for="telefono">WhatsApp</label>
-  <input id="telefono" type="tel" name="telefono" class="form-control" required>
-  <input type="hidden" name="whatsapp" id="whatsapp-completo">
-</div>
-
-
+                            <div class="form-group">
+                                <label for="phone">WhatsApp</label>
+                                <div class="phone-input-group">
+                                    <select id="country" name="pais" class="form-control country-select" required>
+                                        <option value="US" data-code="1" selected>🇺🇸 +1</option>
+                                        <option value="MX" data-code="52">🇲🇽 +52</option>
+                                        <option value="CO" data-code="57">🇨🇴 +57</option>
+                                    </select>
+                                    <input type="tel" id="phone" name="whatsapp" class="form-control phone-input" required>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="intencion">¿Buscás para vivir o invertir?</label>
                                 <select id="intencion" name="proposito" class="form-control" required>
@@ -1487,16 +1510,17 @@
                         <label for="cta-email">Email</label>
                         <input type="email" id="cta-email" name="email" class="form-control" required>
                     </div>
-                    
-<div class="form-group">
-  <label for="telefono-cta">WhatsApp</label>
-  <input id="telefono-cta" type="tel" name="telefono" class="form-control" required>
-  <input type="hidden" name="whatsapp" id="whatsapp-completo-cta">
-</div>
-
-
-
-
+                    <div class="form-group">
+                        <label for="cta-phone">WhatsApp</label>
+                        <div class="phone-input-group">
+                            <select id="cta-country" name="pais" class="form-control country-select" required>
+                                <option value="US" data-code="1" selected>🇺🇸 +1</option>
+                                <option value="MX" data-code="52">🇲🇽 +52</option>
+                                <option value="CO" data-code="57">🇨🇴 +57</option>
+                            </select>
+                            <input type="tel" id="cta-phone" name="whatsapp" class="form-control phone-input" required>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="city">Ciudad de residencia</label>
                         <input type="text" id="city" name="ciudad" class="form-control" required>
@@ -1680,39 +1704,31 @@
                     console.log('CTA form submitted');
                 });
             }
+
+            // Actualizar código de país en el campo de teléfono
+            function updatePhonePrefix(selectElement) {
+                const selectedOption = selectElement.options[selectElement.selectedIndex];
+                const countryCode = selectedOption.getAttribute('data-code');
+                const phoneInput = selectElement.closest('.phone-input-group').querySelector('.phone-input');
+                
+                // Si el campo está vacío o empieza con el código anterior, actualizamos
+                if (!phoneInput.value || phoneInput.value.startsWith('+')) {
+                    phoneInput.value = '+' + countryCode;
+                }
+            }
+
+            // Inicializar los selectores de país
+            const countrySelects = document.querySelectorAll('.country-select');
+            countrySelects.forEach(select => {
+                // Actualizar al cargar
+                updatePhonePrefix(select);
+                
+                // Actualizar cuando cambia la selección
+                select.addEventListener('change', function() {
+                    updatePhonePrefix(this);
+                });
+            });
         });
     </script>
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.17/build/js/intlTelInput.min.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const setups = [
-      { inputId: "telefono", hiddenId: "whatsapp-completo" },
-      { inputId: "telefono-cta", hiddenId: "whatsapp-completo-cta" }
-    ];
-
-    setups.forEach(({ inputId, hiddenId }) => {
-      const input = document.getElementById(inputId);
-      const hiddenInput = document.getElementById(hiddenId);
-      if (!input || !hiddenInput) return;
-
-      const iti = window.intlTelInput(input, {
-        initialCountry: "us",
-        preferredCountries: ["us", "mx", "ca", "ar", "co", "cl", "pe", "es"],
-        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.17/build/js/utils.js"
-      });
-
-      input.form.addEventListener("submit", function (e) {
-        if (iti.isValidNumber()) {
-          hiddenInput.value = iti.getNumber();
-        } else {
-          alert("Por favor, ingresa un número de WhatsApp válido");
-          e.preventDefault();
-        }
-      });
-    });
-  });
-</script>
-
-
 </body>
 </html>
