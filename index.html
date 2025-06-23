@@ -1007,7 +1007,7 @@
                                 <label for="email">Email</label>
                                 <input type="email" id="email" name="email" class="form-control" required>
                             </div>
-                            <div class="form-group">
+                            
 <div class="form-group">
   <label for="telefono">WhatsApp</label>
   <input id="telefono" type="tel" name="telefono" class="form-control" required>
@@ -1487,12 +1487,13 @@
                         <label for="cta-email">Email</label>
                         <input type="email" id="cta-email" name="email" class="form-control" required>
                     </div>
-                    <div class="form-group">
+                    
 <div class="form-group">
-  <label for="telefono">WhatsApp</label>
-  <input id="telefono" type="tel" name="telefono" class="form-control" required>
-  <input type="hidden" name="whatsapp" id="whatsapp-completo">
+  <label for="telefono-cta">WhatsApp</label>
+  <input id="telefono-cta" type="tel" name="telefono" class="form-control" required>
+  <input type="hidden" name="whatsapp" id="whatsapp-completo-cta">
 </div>
+
 
 
 
@@ -1681,48 +1682,37 @@
             }
         });
     </script>
-    <script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.17/build/js/intlTelInput.min.js"></script>
+<script>
   document.addEventListener("DOMContentLoaded", function () {
-    const forms = [document.getElementById('hero-form'), document.getElementById('cta-form')];
+    const setups = [
+      { inputId: "telefono", hiddenId: "whatsapp-completo" },
+      { inputId: "telefono-cta", hiddenId: "whatsapp-completo-cta" }
+    ];
 
-    forms.forEach(form => {
-      if (!form) return;
+    setups.forEach(({ inputId, hiddenId }) => {
+      const input = document.getElementById(inputId);
+      const hiddenInput = document.getElementById(hiddenId);
+      if (!input || !hiddenInput) return;
 
-      form.addEventListener("submit", function (e) {
-        const codigo = form.querySelector("select[id='codigo_pais']").value;
-        const numero = form.querySelector("input[id='phone']").value;
-        const whatsappInput = form.querySelector("input[name='whatsapp']");
+      const iti = window.intlTelInput(input, {
+        initialCountry: "us",
+        preferredCountries: ["us", "mx", "ca", "ar", "co", "cl", "pe", "es"],
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.17/build/js/utils.js"
+      });
 
-        if (codigo && numero) {
-          whatsappInput.value = `${codigo} ${numero}`;
+      input.form.addEventListener("submit", function (e) {
+        if (iti.isValidNumber()) {
+          hiddenInput.value = iti.getNumber();
+        } else {
+          alert("Por favor, ingresa un número de WhatsApp válido");
+          e.preventDefault();
         }
       });
     });
   });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.17/build/js/intlTelInput.min.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const input = document.querySelector("#telefono");
-    const hiddenInput = document.querySelector("#whatsapp-completo");
 
-    const iti = window.intlTelInput(input, {
-      initialCountry: "us",
-      preferredCountries: ["mx", "ca", "us", "ar", "co"],
-      utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.17/build/js/utils.js"
-    });
-
-    // Unifica número completo para enviar a Make
-    input.form.addEventListener("submit", function () {
-      if (iti.isValidNumber()) {
-        hiddenInput.value = iti.getNumber(); // Ej: +52123456789
-      } else {
-        alert("Por favor, ingresa un número de WhatsApp válido");
-        event.preventDefault();
-      }
-    });
-  });
-</script>
 
 </body>
 </html>
