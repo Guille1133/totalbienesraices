@@ -933,6 +933,8 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.17/build/css/intlTelInput.min.css">
+
 </head>
 <body>
     <!-- Header con navegación -->
@@ -1007,25 +1009,9 @@
                             </div>
                             <div class="form-group">
 <div class="form-group">
-  <label for="phone">WhatsApp</label>
-  <div style="display: flex; gap: 10px;">
-    <select id="codigo_pais" class="form-control" style="flex: 1; max-width: 140px;" required>
-      <option value="+1" selected>🇺🇸 +1</option>
-      <option value="+52">🇲🇽 +52</option>
-      <option value="+1">🇨🇦 +1</option>
-      <option value="+54">🇦🇷 +54</option>
-      <option value="+57">🇨🇴 +57</option>
-      <option value="+56">🇨🇱 +56</option>
-      <option value="+34">🇪🇸 +34</option>
-      <option value="+55">🇧🇷 +55</option>
-      <option value="+507">🇵🇦 +507</option>
-      <option value="+593">🇪🇨 +593</option>
-      <option value="+51">🇵🇪 +51</option>
-      <option value="+58">🇻🇪 +58</option>
-    </select>
-    <input type="tel" id="phone" class="form-control" placeholder="123456789" style="flex: 2;" required>
-    <input type="hidden" name="whatsapp" id="whatsapp-completo">
-  </div>
+  <label for="telefono">WhatsApp</label>
+  <input id="telefono" type="tel" name="telefono" class="form-control" required>
+  <input type="hidden" name="whatsapp" id="whatsapp-completo">
 </div>
 
 
@@ -1503,26 +1489,11 @@
                     </div>
                     <div class="form-group">
 <div class="form-group">
-  <label for="phone">WhatsApp</label>
-  <div style="display: flex; gap: 10px;">
-    <select id="codigo_pais" class="form-control" style="flex: 1; max-width: 140px;" required>
-      <option value="+1" selected>🇺🇸 +1</option>
-      <option value="+52">🇲🇽 +52</option>
-      <option value="+1">🇨🇦 +1</option>
-      <option value="+54">🇦🇷 +54</option>
-      <option value="+57">🇨🇴 +57</option>
-      <option value="+56">🇨🇱 +56</option>
-      <option value="+34">🇪🇸 +34</option>
-      <option value="+55">🇧🇷 +55</option>
-      <option value="+507">🇵🇦 +507</option>
-      <option value="+593">🇪🇨 +593</option>
-      <option value="+51">🇵🇪 +51</option>
-      <option value="+58">🇻🇪 +58</option>
-    </select>
-    <input type="tel" id="phone" class="form-control" placeholder="123456789" style="flex: 2;" required>
-    <input type="hidden" name="whatsapp" id="whatsapp-completo">
-  </div>
+  <label for="telefono">WhatsApp</label>
+  <input id="telefono" type="tel" name="telefono" class="form-control" required>
+  <input type="hidden" name="whatsapp" id="whatsapp-completo">
 </div>
+
 
 
                     <div class="form-group">
@@ -1726,6 +1697,29 @@
           whatsappInput.value = `${codigo} ${numero}`;
         }
       });
+    });
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.17/build/js/intlTelInput.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const input = document.querySelector("#telefono");
+    const hiddenInput = document.querySelector("#whatsapp-completo");
+
+    const iti = window.intlTelInput(input, {
+      initialCountry: "us",
+      preferredCountries: ["mx", "ca", "us", "ar", "co"],
+      utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.17/build/js/utils.js"
+    });
+
+    // Unifica número completo para enviar a Make
+    input.form.addEventListener("submit", function () {
+      if (iti.isValidNumber()) {
+        hiddenInput.value = iti.getNumber(); // Ej: +52123456789
+      } else {
+        alert("Por favor, ingresa un número de WhatsApp válido");
+        event.preventDefault();
+      }
     });
   });
 </script>
