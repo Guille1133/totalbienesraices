@@ -1010,7 +1010,7 @@
                     <div class="hero-form">
                         <h3>Reserva tu lugar en el desarrollo de tu preferencia</h3>
                         <p style="text-align:center; font-size: 0.9rem; margin-bottom: 20px;">Dejanos tus datos y recibe todos los detalles para avanzar con confianza.</p>
-                        <form id="hero-form" action="https://hook.us2.make.com/vilz9lq685r9qj0neem74gjr4dvukyhk" method="POST" onsubmit="return validateForm('hero-form')">
+                        <form id="hero-form" action="https://hook.us2.make.com/vilz9lq685r9qj0neem74gjr4dvukyhk" method="POST" onsubmit="return validateAndSubmit('hero-form')">
                             <div class="development-selector">
                                 <div class="development-option active" data-development="kikteil">
                                     <div class="development-icon kikteil">
@@ -1512,7 +1512,7 @@
                 <h2>Recibe la información completa</h2>
                 <p style="text-align: center; margin-bottom: 30px;">Completá tus datos y recibe el catálogo, video + asesoría personalizada</p>
                 
-                <form id="cta-form" action="https://hook.us2.make.com/6dd3rnhc48atfqgwoksthbqq2x0fk9os" method="POST" onsubmit="return validateForm('cta-form')">
+                <form id="cta-form" action="https://hook.us2.make.com/6dd3rnhc48atfqgwoksthbqq2x0fk9os" method="POST" onsubmit="return validateAndSubmit('cta-form')">
                     <div class="development-selector">
                         <div class="development-option active" data-development="kikteil">
                             <div class="development-icon kikteil">
@@ -1763,8 +1763,8 @@
             });
         });
 
-        // Función para validar el formulario completo
-        function validateForm(formId) {
+        // Función para validar y enviar ambos formularios
+        function validateAndSubmit(formId) {
             const form = document.getElementById(formId);
             let isValid = true;
             
@@ -1790,6 +1790,7 @@
                 
                 // Scroll al campo con error
                 phoneInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return false;
             } else {
                 // Limpiar errores
                 phoneInput.classList.remove('error-border');
@@ -1798,8 +1799,23 @@
             
             // Si es válido, enviar el formulario y redirigir
             if (isValid) {
-                // Enviar el formulario
-                form.submit();
+                // Crear un formulario temporal para el envío
+                const tempForm = document.createElement('form');
+                tempForm.action = form.action;
+                tempForm.method = form.method;
+                tempForm.style.display = 'none';
+                
+                // Copiar todos los campos del formulario original
+                Array.from(form.elements).forEach(element => {
+                    if (element.tagName === 'INPUT' || element.tagName === 'SELECT' || element.tagName === 'TEXTAREA') {
+                        const clone = element.cloneNode(true);
+                        tempForm.appendChild(clone);
+                    }
+                });
+                
+                // Agregar el formulario temporal al DOM y enviarlo
+                document.body.appendChild(tempForm);
+                tempForm.submit();
                 
                 // Redirigir después de 500ms (para dar tiempo a que se envíe el formulario)
                 setTimeout(function() {
@@ -1807,7 +1823,7 @@
                 }, 500);
             }
             
-            return isValid;
+            return false; // Prevenir el envío normal del formulario
         }
     </script>
 </body>
