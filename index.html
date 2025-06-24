@@ -15,6 +15,7 @@
             --light: #f8f8f8;
             --gray: #666;
             --light-gray: #eaeaea;
+            --error: #e74c3c;
         }
         
         * {
@@ -954,6 +955,18 @@
             margin-right: 8px;
             vertical-align: middle;
         }
+        
+        /* Estilos para mensajes de error */
+        .error-message {
+            color: var(--error);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .error-border {
+            border-color: var(--error) !important;
+        }
     </style>
 </head>
 <body>
@@ -997,10 +1010,7 @@
                     <div class="hero-form">
                         <h3>Reserva tu lugar en el desarrollo de tu preferencia</h3>
                         <p style="text-align:center; font-size: 0.9rem; margin-bottom: 20px;">Dejanos tus datos y recibe todos los detalles para avanzar con confianza.</p>
-                        <form id="hero-form"
-      action="https://hook.us2.make.com/vilz9lq685r9qj0neem74gjr4dvukyhk"
-      method="POST"
-onsubmit="setTimeout(function(){ window.location.href='gracias.html'; }, 500);">
+                        <form id="hero-form" action="https://hook.us2.make.com/vilz9lq685r9qj0neem74gjr4dvukyhk" method="POST" onsubmit="return validatePhoneNumber('hero-form')">
                             <div class="development-selector">
                                 <div class="development-option active" data-development="kikteil">
                                     <div class="development-icon kikteil">
@@ -1034,9 +1044,8 @@ onsubmit="setTimeout(function(){ window.location.href='gracias.html'; }, 500);">
                                 <label for="phone">WhatsApp</label>
                                 <div class="phone-input-group">
                                     <select id="country" name="pais" class="form-control country-select" required>
-                                
-                                        <option value="MX" data-code="52"selected>🇲🇽 +52 (México)</option>
-                                         <option value="US" data-code="1">🇺🇸 +1 (EE.UU.)</option>
+                                        <option value="MX" data-code="52" selected>🇲🇽 +52 (México)</option>
+                                        <option value="US" data-code="1">🇺🇸 +1 (EE.UU.)</option>
                                         <option value="CO" data-code="57">🇨🇴 +57 (Colombia)</option>
                                         <option value="AR" data-code="54">🇦🇷 +54 (Argentina)</option>
                                         <option value="ES" data-code="34">🇪🇸 +34 (España)</option>
@@ -1059,6 +1068,7 @@ onsubmit="setTimeout(function(){ window.location.href='gracias.html'; }, 500);">
                                     </select>
                                     <input type="tel" id="phone" name="whatsapp" class="form-control phone-input" required>
                                 </div>
+                                <div id="phone-error" class="error-message">Por favor ingresa un número de WhatsApp válido (incluyendo código de área)</div>
                             </div>
                             <div class="form-group">
                                 <label for="intencion">¿Buscás para vivir o invertir?</label>
@@ -1502,10 +1512,7 @@ onsubmit="setTimeout(function(){ window.location.href='gracias.html'; }, 500);">
                 <h2>Recibe la información completa</h2>
                 <p style="text-align: center; margin-bottom: 30px;">Completá tus datos y recibe el catálogo, video + asesoría personalizada</p>
                 
-                <form id="cta-form"
-      action="https://hook.us2.make.com/6dd3rnhc48atfqgwoksthbqq2x0fk9os"
-      method="POST"
-onsubmit="setTimeout(function(){ window.location.href='gracias.html'; }, 500);">
+                <form id="cta-form" action="https://hook.us2.make.com/6dd3rnhc48atfqgwoksthbqq2x0fk9os" method="POST" onsubmit="return validatePhoneNumber('cta-form')">
                     <div class="development-selector">
                         <div class="development-option active" data-development="kikteil">
                             <div class="development-icon kikteil">
@@ -1539,9 +1546,8 @@ onsubmit="setTimeout(function(){ window.location.href='gracias.html'; }, 500);">
                         <label for="cta-phone">WhatsApp</label>
                         <div class="phone-input-group">
                             <select id="cta-country" name="pais" class="form-control country-select" required>
-                                 <option value="MX" data-code="52"selected>🇲🇽 +52 (México)</option>
+                                <option value="MX" data-code="52" selected>🇲🇽 +52 (México)</option>
                                 <option value="US" data-code="1">🇺🇸 +1 (EE.UU.)</option>
-                              
                                 <option value="CO" data-code="57">🇨🇴 +57 (Colombia)</option>
                                 <option value="AR" data-code="54">🇦🇷 +54 (Argentina)</option>
                                 <option value="ES" data-code="34">🇪🇸 +34 (España)</option>
@@ -1564,6 +1570,7 @@ onsubmit="setTimeout(function(){ window.location.href='gracias.html'; }, 500);">
                             </select>
                             <input type="tel" id="cta-phone" name="whatsapp" class="form-control phone-input" required>
                         </div>
+                        <div id="cta-phone-error" class="error-message">Por favor ingresa un número de WhatsApp válido (incluyendo código de área)</div>
                     </div>
                     <div class="form-group">
                         <label for="city">Ciudad de residencia</label>
@@ -1731,12 +1738,6 @@ onsubmit="setTimeout(function(){ window.location.href='gracias.html'; }, 500);">
                 });
             });
             
-            // Form submissions
-            const heroForm = document.getElementById('hero-form');
-            const ctaForm = document.getElementById('cta-form');
-            
-        
-
             // Actualizar código de país en el campo de teléfono
             function updatePhonePrefix(selectElement) {
                 const selectedOption = selectElement.options[selectElement.selectedIndex];
@@ -1761,6 +1762,49 @@ onsubmit="setTimeout(function(){ window.location.href='gracias.html'; }, 500);">
                 });
             });
         });
+
+        // Función para validar el número de teléfono
+        function validatePhoneNumber(formId) {
+            const form = document.getElementById(formId);
+            let isValid = true;
+            
+            // Obtener elementos del formulario
+            const phoneInput = form.querySelector('.phone-input');
+            const countrySelect = form.querySelector('.country-select');
+            const errorMessage = formId === 'hero-form' ? 
+                document.getElementById('phone-error') : 
+                document.getElementById('cta-phone-error');
+            
+            // Validar número de teléfono
+            const phoneNumber = phoneInput.value.trim();
+            const countryCode = countrySelect.options[countrySelect.selectedIndex].getAttribute('data-code');
+            
+            // Expresión regular para validar números de teléfono internacionales
+            const phoneRegex = new RegExp(`^\\+${countryCode}\\d{8,15}$`);
+            
+            if (!phoneRegex.test(phoneNumber)) {
+                // Mostrar error
+                phoneInput.classList.add('error-border');
+                errorMessage.style.display = 'block';
+                isValid = false;
+                
+                // Scroll al campo con error
+                phoneInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                // Limpiar errores
+                phoneInput.classList.remove('error-border');
+                errorMessage.style.display = 'none';
+            }
+            
+            // Si es válido, redirigir después de enviar
+            if (isValid) {
+                setTimeout(function(){ 
+                    window.location.href='gracias.html'; 
+                }, 500);
+            }
+            
+            return isValid;
+        }
     </script>
 </body>
 </html>
