@@ -1,1 +1,1420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terrenos Premium en Mérida | Hacienda Kikteil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a5632;
+            --secondary: #d4af37;
+            --dark: #1e1e1e;
+            --light: #f8f8f8;
+            --gray: #666;
+            --light-gray: #eaeaea;
+            --error: #e74c3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary);
+            color: var(--dark);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: #c19b2e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #134526;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 15px auto;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
 
+        .benefit-icon, .amenity-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            font-size: 2.5rem;
+        }
+        
+        .benefit-icon svg, .amenity-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 10px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-agente-container {
+            z-index: 1001;
+        }
+
+        .logo-agente {
+            height: 50px;
+            width: auto;
+            max-width: 150px;
+        }
+        
+        .nav {
+            display: flex;
+        }
+        
+        .nav-list {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .nav.active {
+                transform: translateX(0);
+            }
+            
+            .nav-list {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .nav-link {
+                font-size: 1.2rem;
+                padding: 15px 25px;
+                display: block;
+                min-width: 200px;
+            }
+            
+            .logo-agente {
+                height: 40px;
+                max-width: 120px;
+            }
+        }
+
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            margin-top: 70px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('portada-kikteil.webp') no-repeat center center/cover;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 40px 0;
+        }
+        
+        .hero-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+        }
+        
+        .hero-text {
+            flex: 1;
+            min-width: 400px;
+            max-width: 650px;
+        }
+        
+        .hero-text h1 {
+            font-size: 3.8rem;
+            margin-bottom: 30px;
+            line-height: 1.1;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+            color: #ffffff;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        
+        .hero-text p {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            font-weight: 500;
+            color: #f0f0f0;
+        }
+        
+        .hero-form-container {
+            flex: 1;
+            min-width: 420px;
+            max-width: 480px;
+        }
+        
+        .hero-form {
+            background: rgba(255,255,255,0.97);
+            padding: 35px;
+            border-radius: 16px;
+            color: var(--dark);
+            width: 100%;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            backdrop-filter: blur(15px);
+        }
+        
+        .hero-form h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 8px rgba(26, 86, 50, 0.3);
+            outline: none;
+        }
+        
+        .benefits {
+            background-color: var(--light);
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        @media (max-width: 992px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .benefit-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .benefit-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .benefit-item h3 {
+            color: var(--primary);
+        }
+        
+        .gallery {
+            position: relative;
+            background-color: var(--dark);
+            color: white;
+            padding: 0;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 60px 20px 30px;
+            text-align: center;
+        }
+        
+        .gallery-overlay h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .story {
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+        }
+        
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .story-content p {
+            font-size: 1.1rem;
+        }
+        
+        .amenities {
+            background-color: var(--light);
+        }
+        
+        .amenities-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+        
+        .amenities-tab {
+            padding: 12px 25px;
+            background: white;
+            border: 1px solid var(--light-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--dark);
+            text-align: center;
+            user-select: none;
+        }
+        
+        .amenities-tab:first-child {
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .amenities-tab:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .amenities-tab:hover {
+            background-color: #f5f5f5;
+            transform: translateY(-1px);
+        }
+        
+        .amenities-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(26, 86, 50, 0.3);
+        }
+        
+        .amenities-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .amenities-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .amenity-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .amenity-icon {
+            margin-right: 15px;
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+        
+        .location {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .location-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 40px;
+        }
+        
+        .location-map {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background: var(--light-gray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .cta {
+            background: linear-gradient(rgba(26, 86, 50, 0.9), rgba(26, 86, 50, 0.9)), url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: white;
+        }
+        
+        .cta-form {
+            max-width: 750px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            border-radius: 16px;
+            color: var(--dark);
+        }
+        
+        .cta-form h2 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .footer-contact {
+            margin-bottom: 20px;
+        }
+        
+        .footer-social a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        @media (max-width: 1200px) {
+            .hero-container {
+                max-width: 1200px;
+            }
+            
+            .hero-content {
+                gap: 40px;
+            }
+            
+            .hero-text {
+                min-width: 350px;
+                max-width: 550px;
+            }
+            
+            .hero-form-container {
+                min-width: 380px;
+                max-width: 420px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-text h1 {
+                font-size: 3.2rem;
+            }
+            
+            .hero-text {
+                min-width: 300px;
+            }
+            
+            .hero-form-container {
+                min-width: 350px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section, .cta {
+                padding: 60px 0;
+            }
+            
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .hero-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .hero-text, .hero-form-container {
+                max-width: 100%;
+                min-width: 100%;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .location-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .cta-form {
+                padding: 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                width: 100% !important;
+                padding: 18px 0 !important;
+                font-size: 1.1rem !important;
+                line-height: 1.2;
+            }
+            
+            .hero-form, .cta-form {
+                padding: 25px;
+            }
+        }
+
+        .phone-input-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .country-select {
+            flex: 0 0 150px;
+            margin-right: 10px;
+        }
+
+        .phone-input {
+            flex: 1;
+        }
+
+        .country-flag {
+            width: 20px;
+            height: 15px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        .error-message {
+            color: var(--error);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .error-border {
+            border-color: var(--error) !important;
+        }
+    </style>
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '705046695583164');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=705046695583164&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+</head>
+<body>
+    <iframe name="hidden_iframe" style="display:none;"></iframe>
+    <!-- Header con navegación -->
+    <header class="header">
+        <div class="header-container">
+            <!-- Logo del agente inmobiliario -->
+            <div class="logo-agente-container">
+                <img src="logot2.png" alt="Logo Agente Inmobiliario" class="logo-agente">
+            </div>
+            
+            <!-- Botón hamburguesa -->
+            <button class="hamburger" id="hamburger" aria-label="Menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <!-- Menú de navegación -->
+            <nav class="nav" id="nav">
+                <ul class="nav-list">
+                    <li><a href="#hero" class="nav-link">Inicio</a></li>
+                    <li><a href="#benefits" class="nav-link">Beneficios</a></li>
+                    <li><a href="#amenities" class="nav-link">Amenidades</a></li>
+                    <li><a href="#location" class="nav-link">Ubicación</a></li>
+                    <li><a href="#cta-section" class="nav-link">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Vive la experiencia única de Hacienda Kikteil en Mérida</h1>
+                    <p>Terrenos desde $1,500,000 MXN | Financiamiento hasta 48 meses sin intereses</p>
+                    <p>Una hacienda restaurada con amenidades de lujo y diseño arquitectónico que honra sus raíces mayas.</p>
+                </div>
+                <div class="hero-form-container">
+                    <div class="hero-form">
+                        <h3>Reserva tu terreno en Hacienda Kikteil</h3>
+                        <p style="text-align:center; font-size: 0.9rem; margin-bottom: 20px;">Dejanos tus datos y recibe todos los detalles para avanzar con confianza.</p>
+                        <form id="hero-form" action="https://hook.us2.make.com/vilz9lq685r9qj0neem74gjr4dvukyhk" method="POST" target="hidden_iframe" onsubmit="return validateForm('hero-form')">
+                            <input type="hidden" name="desarrollo" value="Hacienda Kikteil">
+                            <div class="form-group">
+                                <label for="name">Nombre Completo</label>
+                                <input type="text" id="name" name="nombre" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">WhatsApp</label>
+                                <div class="phone-input-group">
+                                    <select id="country" name="pais" class="form-control country-select" required>
+                                        <option value="MX" data-code="52" selected>🇲🇽 +52 (México)</option>
+                                        <option value="US" data-code="1">🇺🇸 +1 (EE.UU.)</option>
+                                        <option value="CO" data-code="57">🇨🇴 +57 (Colombia)</option>
+                                        <option value="AR" data-code="54">🇦🇷 +54 (Argentina)</option>
+                                        <option value="ES" data-code="34">🇪🇸 +34 (España)</option>
+                                        <option value="PE" data-code="51">🇵🇪 +51 (Perú)</option>
+                                        <option value="CL" data-code="56">🇨🇱 +56 (Chile)</option>
+                                        <option value="EC" data-code="593">🇪🇨 +593 (Ecuador)</option>
+                                        <option value="VE" data-code="58">🇻🇪 +58 (Venezuela)</option>
+                                        <option value="BR" data-code="55">🇧🇷 +55 (Brasil)</option>
+                                        <option value="CR" data-code="506">🇨🇷 +506 (Costa Rica)</option>
+                                        <option value="PA" data-code="507">🇵🇦 +507 (Panamá)</option>
+                                        <option value="DO" data-code="1">🇩🇴 +1 (Rep. Dominicana)</option>
+                                        <option value="GT" data-code="502">🇬🇹 +502 (Guatemala)</option>
+                                        <option value="SV" data-code="503">🇸🇻 +503 (El Salvador)</option>
+                                        <option value="HN" data-code="504">🇭🇳 +504 (Honduras)</option>
+                                        <option value="NI" data-code="505">🇳🇮 +505 (Nicaragua)</option>
+                                        <option value="PY" data-code="595">🇵🇾 +595 (Paraguay)</option>
+                                        <option value="UY" data-code="598">🇺🇾 +598 (Uruguay)</option>
+                                        <option value="BO" data-code="591">🇧🇴 +591 (Bolivia)</option>
+                                        <option value="CA" data-code="1">🇨🇦 +1 (Canadá)</option>
+                                    </select>
+                                    <input type="tel" id="phone" name="whatsapp" class="form-control phone-input" required>
+                                </div>
+                                <div id="phone-error" class="error-message">Por favor ingresa un número de WhatsApp válido (incluyendo código de área)</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="intencion">¿Buscás para vivir o invertir?</label>
+                                <select id="intencion" name="proposito" class="form-control" required>
+                                    <option value="">Seleccionar</option>
+                                    <option value="vivir">Vivir</option>
+                                    <option value="invertir">Invertir</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Reservar mi terreno ahora</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Benefits Section -->
+    <section class="section benefits" id="benefits">
+        <div class="container">
+            <h2 class="section-title">Vive una experiencia única en Hacienda Kikteil</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Casa Club Hacienda única en Yucatán</h3>
+                    <p>Un espacio exclusivo diseñado para el disfrute de nuestros residentes.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-swimming-pool"></i>
+                    </div>
+                    <h3>Más de 20 amenidades</h3>
+                    <p>Albercas, Canal de Nado, Gym, Canchas, Biblioteca, Kids Club y mucho más.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Seguridad 24/7</h3>
+                    <p>Acceso controlado y vialidades amplias para tu tranquilidad.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>Financiamiento especial</h3>
+                    <p>Hasta 48 meses sin intereses para que hagas realidad tu sueño.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Alta plusvalía</h3>
+                    <p>Zona en desarrollo con infraestructura de primer nivel.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Entorno natural</h3>
+                    <p>Rodeado de vegetación, aire puro y espacios verdes. Un lugar para reconectar con la tranquilidad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section class="gallery" id="video-section">
+        <div class="video-container">
+            <iframe 
+                src="https://www.youtube.com/embed/fzUCpsgdLsA?autoplay=1&mute=1" 
+                title="Hacienda Kikteil - Video"
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+        <div class="gallery-overlay">
+            <div class="container">
+                <h2>Mirá cómo se vive en Hacienda Kikteil</h2>
+                <p>Sentí la diferencia de vivir con historia y lujo.</p>
+                <a href="#video-section" class="btn btn-primary">Ver el video completo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="section story">
+        <div class="container">
+            <div class="story-content">
+                <h2 class="section-title">Un lugar donde el pasado y el futuro se encuentran</h2>
+                <p>Hacienda Kikteil es más que un desarrollo: es una obra de arte restaurada. Una comunidad con historia, amenidades de lujo y diseño arquitectónico que honra sus raíces mayas.</p>
+                <p>Cada detalle ha sido cuidadosamente pensado para ofrecerte un estilo de vida único, donde la tradición y la modernidad se fusionan en perfecta armonía.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Amenities Section -->
+    <section class="section amenities" id="amenities">
+        <div class="container">
+            <h2 class="section-title">Amenidades Exclusivas</h2>
+            
+            <div class="amenities-tabs">
+                <div class="amenities-tab active" data-tab="club">Casa Club</div>
+                <div class="amenities-tab" data-tab="areas">Áreas Comunes</div>
+                <div class="amenities-tab" data-tab="seguridad">Seguridad</div>
+            </div>
+            
+            <div class="amenities-content active" id="club-content">
+                <div class="amenities-grid">
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div>
+                            <h3>Biblioteca</h3>
+                            <p>Espacio tranquilo para lectura y estudio.</p>
+                        </div>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div>
+                            <h3>Workcenter</h3>
+                            <p>Área de coworking totalmente equipada.</p>
+                        </div>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-coffee"></i>
+                        </div>
+                        <div>
+                            <h3>Cafetería</h3>
+                            <p>Disfruta de bebidas y snacks premium.</p>
+                        </div>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-cocktail"></i>
+                        </div>
+                        <div>
+                            <h3>Bar</h3>
+                            <p>Ambiente sofisticado para reuniones sociales.</p>
+                        </div>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <div>
+                            <h3>Gimnasio</h3>
+                            <p>Equipo de última generación para tu rutina.</p>
+                        </div>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-swimmer"></i>
+                        </div>
+                        <div>
+                            <h3>Albercas</h3>
+                            <p>Múltiples opciones para refrescarte.</p>
+                        </div>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        <div>
+                            <h3>Canal de nado</h3>
+                            <p>Para los amantes de la natación.</p>
+                        </div>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <div>
+                            <h3>Kids Club</h3>
+                            <p>Espacio seguro y divertido para los más pequeños.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="amenities-content" id="areas-content">
+                <div class="amenities-grid">
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <div>
+                            <h3>Parques</h3>
+                            <p>Áreas verdes para disfrutar con la familia.</p>
+                        </div>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div>
+                            <h3>Áreas de picnic</h3>
+                            <p>Disfruta de comidas al aire libre.</p>
+                        </div>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-golf-ball"></i>
+                        </div>
+                        <div>
+                            <h3>Minigolf</h3>
+                            <p>Diversión para todas las edades.</p>
+                        </div>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <div>
+                            <h3>Teatro al aire libre</h3>
+                            <p>Eventos culturales bajo las estrellas.</p>
+                        </div>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-basketball-ball"></i>
+                        </div>
+                        <div>
+                            <h3>Canchas deportivas</h3>
+                            <p>Variedad de opciones para mantenerse activo.</p>
+                        </div>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-paw"></i>
+                        </div>
+                        <div>
+                            <h3>Petpark</h3>
+                            <p>Zona especial para tus mascotas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="amenities-content" id="seguridad-content">
+                <div class="amenities-grid">
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Vigilancia 24/7</h3>
+                            <p>Caseta de seguridad con personal capacitado.</p>
+                        </div>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-road"></i>
+                        </div>
+                        <div>
+                            <h3>Vialidades amplias</h3>
+                            <p>Diseño urbano pensado en tu comodidad.</p>
+                        </div>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div>
+                            <h3>Infraestructura lista</h3>
+                            <p>Energía, agua potable y telefonía disponibles.</p>
+                        </div>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-bicycle"></i>
+                        </div>
+                        <div>
+                            <h3>Ciclovía interna</h3>
+                            <p>Recorre la hacienda de manera segura.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Location Section -->
+    <section class="section location" id="location">
+        <div class="container">
+            <div class="location-text">
+                <h2 class="section-title">Ubicación Privilegiada</h2>
+                <p>Hacienda Kikteil se encuentra en una de las zonas con mayor proyección de Mérida, rodeada de naturaleza, tranquilidad y desarrollos de primer nivel.</p>
+                <p>Ubicada a minutos del anillo periférico, combina lo mejor de dos mundos: la paz de una hacienda restaurada y la cercanía con todo lo que necesitás</p>
+                <ul style="margin-top: 20px; list-style-position: inside;">
+                    <li>A solo 15 min del centro histórico de Mérida</li>
+                    <li>A 25 min de las playas de Progreso</li>
+                    <li>Conectividad directa al anillo periférico</li>
+                    <li>Acceso rápido a escuelas, hospitales y servicios</li>
+                    <li>Zona en desarrollo con alta plusvalía</li>
+                </ul>
+                <p style="margin-top: 20px;">
+                    Elegí una ubicación que no solo te conecta con la ciudad, sino también con un estilo de vida auténtico y valioso.
+                </p>
+            </div>
+            <div class="location-map">
+                <!-- Google Maps Embed -->
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3735.1146992075564!2d-89.6988557!3d21.1297186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f55dfd0c07904f9%3A0x200d51f7df1741af!2sHacienda%20Kikteil%20by%20DESUR!5e0!3m2!1ses-419!2smx!4v1718040822736!5m2!1ses-419!2smx" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="section cta" id="cta-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Últimos lotes disponibles en Hacienda Kikteil</h2>
+            <p class="text-center" style="color: white; margin-bottom: 40px; font-size: 1.2rem;">Financiamiento hasta 48 meses sin intereses</p>
+            
+            <div class="cta-form">
+                <h2>Recibe la información completa</h2>
+                <p style="text-align: center; margin-bottom: 30px;">Completá tus datos y recibe el catálogo, video + asesoría personalizada</p>
+                
+                <form id="cta-form" action="https://hook.us2.make.com/6dd3rnhc48atfqgwoksthbqq2x0fk9os" method="POST" target="hidden_iframe" onsubmit="return validateForm('cta-form')">
+                    <input type="hidden" name="desarrollo" value="Hacienda Kikteil">
+                    <div class="form-group">
+                        <label for="fullname">Nombre completo</label>
+                        <input type="text" id="fullname" name="nombre" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cta-email">Email</label>
+                        <input type="email" id="cta-email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cta-phone">WhatsApp</label>
+                        <div class="phone-input-group">
+                            <select id="cta-country" name="pais" class="form-control country-select" required>
+                                <option value="MX" data-code="52" selected>🇲🇽 +52 (México)</option>
+                                <option value="US" data-code="1">🇺🇸 +1 (EE.UU.)</option>
+                                <option value="CO" data-code="57">🇨🇴 +57 (Colombia)</option>
+                                <option value="AR" data-code="54">🇦🇷 +54 (Argentina)</option>
+                                <option value="ES" data-code="34">🇪🇸 +34 (España)</option>
+                                <option value="PE" data-code="51">🇵🇪 +51 (Perú)</option>
+                                <option value="CL" data-code="56">🇨🇱 +56 (Chile)</option>
+                                <option value="EC" data-code="593">🇪🇨 +593 (Ecuador)</option>
+                                <option value="VE" data-code="58">🇻🇪 +58 (Venezuela)</option>
+                                <option value="BR" data-code="55">🇧🇷 +55 (Brasil)</option>
+                                <option value="CR" data-code="506">🇨🇷 +506 (Costa Rica)</option>
+                                <option value="PA" data-code="507">🇵🇦 +507 (Panamá)</option>
+                                <option value="DO" data-code="1">🇩🇴 +1 (Rep. Dominicana)</option>
+                                <option value="GT" data-code="502">🇬🇹 +502 (Guatemala)</option>
+                                <option value="SV" data-code="503">🇸🇻 +503 (El Salvador)</option>
+                                <option value="HN" data-code="504">🇭🇳 +504 (Honduras)</option>
+                                <option value="NI" data-code="505">🇳🇮 +505 (Nicaragua)</option>
+                                <option value="PY" data-code="595">🇵🇾 +595 (Paraguay)</option>
+                                <option value="UY" data-code="598">🇺🇾 +598 (Uruguay)</option>
+                                <option value="BO" data-code="591">🇧🇴 +591 (Bolivia)</option>
+                                <option value="CA" data-code="1">🇨🇦 +1 (Canadá)</option>
+                            </select>
+                            <input type="tel" id="cta-phone" name="whatsapp" class="form-control phone-input" required>
+                        </div>
+                        <div id="cta-phone-error" class="error-message">Por favor ingresa un número de WhatsApp válido (incluyendo código de área)</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Ciudad de residencia</label>
+                        <input type="text" id="city" name="ciudad" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="purpose">¿Buscás para vivir o invertir?</label>
+                        <select id="purpose" name="proposito" class="form-control" required>
+                            <option value="">Seleccionar</option>
+                            <option value="vivir">Vivir</option>
+                            <option value="invertir">Invertir</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="budget">¿Cuál es tu presupuesto aproximado?</label>
+                        <select id="budget" name="presupuesto" class="form-control" required>
+                            <option value="">Seleccionar</option>
+                            <option value="1-2">$1M - $2M MXN</option>
+                            <option value="2-3">$2M - $3M MXN</option>
+                            <option value="3-4">$3M - $4M MXN</option>
+                            <option value="4+">Más de $4M MXN</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="delivery">¿Te interesa entrega inmediata o financiamiento?</label>
+                        <select id="delivery" name="entrega" class="form-control" required>
+                            <option value="">Seleccionar</option>
+                            <option value="inmediata">Entrega inmediata</option>
+                            <option value="financiamiento">Financiamiento</option>
+                        </select>
+                    </div>
+                    <p style="text-align: center; margin-bottom: 20px; font-weight: bold;">
+                        Apartá tu terreno hoy con el 10% y asegurá tu espacio en Hacienda Kikteil.
+                    </p>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Quiero reservar mi lote</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo" style="color: var(--secondary); font-size: 1.5rem; font-weight: 700;">
+                Hacienda Kikteil – Proyecto Exclusivo
+            </div>
+
+            <p style="color: #ccc; margin-bottom: 10px;">
+                Mérida, Yucatán, México
+            </p>
+
+            <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 5px;">
+                Proyecto comercializado por <strong>Total Bienes Raíces</strong>, empresa profesional registrada en <strong>AMPI</strong>.
+            </p>
+
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+
+            <div class="copyright">
+                © 2025 Total Bienes Raices. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Menú hamburguesa
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                nav.classList.toggle('active');
+                document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+            });
+            
+            // Cerrar menú al hacer click en un enlace
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+            
+            // Cerrar menú al hacer scroll
+            window.addEventListener('scroll', function() {
+                if (nav.classList.contains('active')) {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Smooth scroll para los enlaces de navegación
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const headerHeight = 70;
+                        const targetPosition = targetElement.offsetTop - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Tabs de amenidades
+            const amenitiesTabs = document.querySelectorAll('.amenities-tab');
+            const amenitiesContents = document.querySelectorAll('.amenities-content');
+            
+            amenitiesTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    amenitiesTabs.forEach(t => t.classList.remove('active'));
+                    amenitiesContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    const targetContent = document.getElementById(this.dataset.tab + '-content');
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                    }
+                });
+            });
+            
+            // Actualizar código de país en el campo de teléfono
+            function updatePhonePrefix(selectElement) {
+                const selectedOption = selectElement.options[selectElement.selectedIndex];
+                const countryCode = selectedOption.getAttribute('data-code');
+                const phoneInput = selectElement.closest('.phone-input-group').querySelector('.phone-input');
+                
+                // Si el campo está vacío o empieza con el código anterior, actualizamos
+                if (!phoneInput.value || phoneInput.value.startsWith('+')) {
+                    phoneInput.value = '+' + countryCode;
+                }
+            }
+
+            // Inicializar los selectores de país
+            const countrySelects = document.querySelectorAll('.country-select');
+            countrySelects.forEach(select => {
+                // Actualizar al cargar
+                updatePhonePrefix(select);
+                
+                // Actualizar cuando cambia la selección
+                select.addEventListener('change', function() {
+                    updatePhonePrefix(this);
+                });
+            });
+        });
+
+        // Función para validar el formulario completo
+        function validateForm(formId) {
+            const form = document.getElementById(formId);
+            let isValid = true;
+            
+            // Validar número de teléfono
+            const phoneInput = form.querySelector('.phone-input');
+            const countrySelect = form.querySelector('.country-select');
+            const errorMessage = formId === 'hero-form' ? 
+                document.getElementById('phone-error') : 
+                document.getElementById('cta-phone-error');
+            
+            // Validar número de teléfono
+            const phoneNumber = phoneInput.value.trim();
+            const countryCode = countrySelect.options[countrySelect.selectedIndex].getAttribute('data-code');
+            
+            // Expresión regular para validar números de teléfono internacionales
+            const phoneRegex = new RegExp(`^\\+${countryCode}\\d{8,15}$`);
+            
+            if (!phoneRegex.test(phoneNumber)) {
+                // Mostrar error
+                phoneInput.classList.add('error-border');
+                errorMessage.style.display = 'block';
+                isValid = false;
+                
+                // Scroll al campo con error
+                phoneInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                // Limpiar errores
+                phoneInput.classList.remove('error-border');
+                errorMessage.style.display = 'none';
+            }
+            
+            // Si es válido, enviar el formulario y redirigir
+            if (isValid) {
+                // Enviar el formulario
+                form.submit();
+                
+                // Redirigir después de 500ms (para dar tiempo a que se envíe el formulario)
+                setTimeout(function() {
+                    window.location.href = 'gracias.html';
+                }, 500);
+            }
+            
+            return isValid;
+        }
+    </script>
+</body>
+</html>
