@@ -100,7 +100,7 @@
             background-color: #f9f9f9;
         }
         
-        /* Botón MEJORADO */
+        /* Botón principal */
         .cta-button {
             background: linear-gradient(135deg, #8b2e00 0%, #c44a1c 100%);
             color: white;
@@ -207,6 +207,34 @@
             margin-right: 8px;
         }
         
+        /* Nuevo estilo para el botón de Descarga Guía VIP */
+        .guide-cta-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 14px 30px;
+            background: linear-gradient(135deg, #8b2e00 0%, #c44a1c 100%);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 12px rgba(139, 46, 0, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 16px;
+        }
+        
+        .guide-cta-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(139, 46, 0, 0.4);
+            background: linear-gradient(135deg, #a83708 0%, #d85b2b 100%);
+        }
+        
+        .guide-cta-link:active {
+            transform: translateY(1px);
+        }
+        
         /* Estilos para desktop */
         @media (min-width: 992px) {
             .container {
@@ -251,6 +279,12 @@
                 font-size: 24px;
                 margin-right: 15px;
             }
+            
+            .guide-cta-link {
+                padding: 16px 35px;
+                font-size: 18px;
+                margin: 25px 0 30px;
+            }
         }
         
         @media (min-width: 768px) and (max-width: 991px) {
@@ -273,6 +307,9 @@
         <header>
             <h1>Descubre Cómo Invertir en una Hacienda de Lujo en Mérida desde $1,988,000 MXN</h1>
             <h2>Vive o invierte en un desarrollo único con historia, exclusividad y plusvalía asegurada.</h2>
+            
+            <!-- NUEVO BOTÓN QUE LLEVA AL FORMULARIO -->
+            <a href="#formulario-vip" class="guide-cta-link pulse">DESCARGA LA GUÍA VIP PARA BENEFICIOS EXCLUSIVOS ↓</a>
         </header>
         
         <div class="content-wrapper">
@@ -301,7 +338,8 @@
                 </div>
             </div>
             
-            <div class="highlight-box">
+            <!-- Formulario con ID para el ancla -->
+            <div class="highlight-box" id="formulario-vip">
                 <form>
                     <div class="form-group">
                         <label for="name" class="required-field">Nombre Completo</label>
@@ -350,13 +388,25 @@
     </div>
 
     <script>
-        // Efecto adicional al hacer hover
-        document.querySelector('.cta-button').addEventListener('mouseover', function() {
-            this.classList.remove('pulse');
+        // Efecto adicional al hacer hover en botones
+        const buttons = document.querySelectorAll('.cta-button, .guide-cta-link');
+        
+        buttons.forEach(button => {
+            button.addEventListener('mouseover', function() {
+                this.classList.remove('pulse');
+            });
+            
+            button.addEventListener('mouseout', function() {
+                this.classList.add('pulse');
+            });
         });
         
-        document.querySelector('.cta-button').addEventListener('mouseout', function() {
-            this.classList.add('pulse');
+        // Scroll suave para el enlace
+        document.querySelector('.guide-cta-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
         });
     </script>
 </body>
