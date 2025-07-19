@@ -235,6 +235,41 @@
             transform: translateY(1px);
         }
         
+        /* Estilos para la página de gracias */
+        .thank-you-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .thank-you-icon {
+            font-size: 60px;
+            color: #25D366;
+            margin-bottom: 20px;
+        }
+        
+        .thank-you-message {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: #5a4a3a;
+        }
+        
+        .download-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #8b2e00;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .download-link:hover {
+            background-color: #a83708;
+        }
+        
         /* Estilos para desktop */
         @media (min-width: 992px) {
             .container {
@@ -285,6 +320,14 @@
                 font-size: 18px;
                 margin: 25px 0 30px;
             }
+            
+            .thank-you-page {
+                padding: 60px 40px;
+            }
+            
+            .thank-you-message {
+                font-size: 24px;
+            }
         }
         
         @media (min-width: 768px) and (max-width: 991px) {
@@ -304,86 +347,104 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Descubre Cómo Invertir en una Hacienda de Lujo en Mérida desde $1,988,000 MXN</h1>
-            <h2>Vive o invierte en un desarrollo único con historia, exclusividad y plusvalía asegurada.</h2>
+        <!-- Página principal (formulario) -->
+        <div id="main-content">
+            <header>
+                <h1>Descubre Cómo Invertir en una Hacienda de Lujo en Mérida desde $1,988,000 MXN</h1>
+                <h2>Vive o invierte en un desarrollo único con historia, exclusividad y plusvalía asegurada.</h2>
+                
+                <a href="#formulario-vip" class="guide-cta-link pulse">DESCARGA LA GUÍA VIP PARA BENEFICIOS EXCLUSIVOS ↓</a>
+            </header>
             
-            <!-- NUEVO BOTÓN QUE LLEVA AL FORMULARIO -->
-            <a href="#formulario-vip" class="guide-cta-link pulse">DESCARGA LA GUÍA VIP PARA BENEFICIOS EXCLUSIVOS ↓</a>
-        </header>
-        
-        <div class="content-wrapper">
-            <div class="benefits-container">
-                <div class="highlight-box">
-                    <p style="font-size: 17px; margin-bottom: 20px; font-weight: 500; color: #5a4a3a;">
-                        <span style="font-size: 24px; color: #8b2e00;">✨</span> Una joya restaurada con alma maya, amenidades de primer nivel y diseño arquitectónico atemporal.
-                        <br><br>
-                        Financiamiento hasta 48 meses sin intereses. Vive la experiencia o hazla crecer con plusvalía.
-                    </p>
-                    
-                    <div class="benefits">
-                        <div class="benefit-item">
-                            <span class="benefit-icon">✓</span>
-                            <span>Recibirás inmediatamente la Guía VIP con precios, renders y planos exclusivos en tu email</span>
-                        </div>
-                        <div class="benefit-item">
-                            <span class="benefit-icon">✓</span>
-                            <span>Un asesor especializado se comunicará contigo para ofrecerte información personalizada</span>
-                        </div>
-                        <div class="benefit-item">
-                            <span class="benefit-icon">✓</span>
-                            <span>Acceso prioritario antes que el público general</span>
+            <div class="content-wrapper">
+                <div class="benefits-container">
+                    <div class="highlight-box">
+                        <p style="font-size: 17px; margin-bottom: 20px; font-weight: 500; color: #5a4a3a;">
+                            <span style="font-size: 24px; color: #8b2e00;">✨</span> Una joya restaurada con alma maya, amenidades de primer nivel y diseño arquitectónico atemporal.
+                            <br><br>
+                            Financiamiento hasta 48 meses sin intereses. Vive la experiencia o hazla crecer con plusvalía.
+                        </p>
+                        
+                        <div class="benefits">
+                            <div class="benefit-item">
+                                <span class="benefit-icon">✓</span>
+                                <span>Recibirás inmediatamente la Guía VIP con precios, renders y planos exclusivos en tu email</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">✓</span>
+                                <span>Un asesor especializado se comunicará contigo para ofrecerte información personalizada</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">✓</span>
+                                <span>Acceso prioritario antes que el público general</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Formulario con ID para el ancla -->
-            <div class="highlight-box" id="formulario-vip">
-                <form>
-                    <div class="form-group">
-                        <label for="name" class="required-field">Nombre Completo</label>
-                        <input type="text" id="name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email" class="required-field">Correo Electrónico</label>
-                        <input type="email" id="email" required>
-                        <p class="contact-note">Te enviaremos la guía exclusiva a este correo</p>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="phone" class="required-field">Teléfono</label>
-                        <div class="phone-container">
-                            <select id="country-code" class="country-code" required>
-                                <option value="+52" selected>🇲🇽 +52 MX</option>
-                                <option value="+1">🇺🇸 +1 US</option>
-                                <option value="+34">🇪🇸 +34 ES</option>
-                                <option value="+54">🇦🇷 +54 AR</option>
-                                <option value="+55">🇧🇷 +55 BR</option>
-                                <option value="+56">🇨🇱 +56 CL</option>
-                                <option value="+57">🇨🇴 +57 CO</option>
-                                <option value="+51">🇵🇪 +51 PE</option>
-                            </select>
-                            <input type="tel" id="phone" class="phone-number" required placeholder="Ej. 5512345678">
-                        </div>
-                        <div class="whatsapp-note">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-                            <span>Un asesor se comunicará contigo por este número para seguimiento personalizado</span>
-                        </div>
-                    </div>
-                    
-                    <button class="cta-button pulse">OBTENER GUÍA VIP AHORA ↓</button>
-                    
-                    <div style="text-align: center; margin: 15px 0; font-size: 14px; color: #8b2e00; font-weight: 600;">
-                        ⌛ SOLO PARA LOS PRIMEROS 20 SOLICITANTES
-                    </div>
-                </form>
                 
-                <p class="privacy">
-                    🔒 Tu información está 100% segura. Solo usaremos tus datos para enviarte la guía y ofrecerte asesoría personalizada.
-                </p>
+                <div class="highlight-box" id="formulario-vip">
+                    <form id="lead-form">
+                        <div class="form-group">
+                            <label for="name" class="required-field">Nombre Completo</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="required-field">Correo Electrónico</label>
+                            <input type="email" id="email" required>
+                            <p class="contact-note">Te enviaremos la guía exclusiva a este correo</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone" class="required-field">Teléfono</label>
+                            <div class="phone-container">
+                                <select id="country-code" class="country-code" required>
+                                    <option value="+52" selected>🇲🇽 +52 MX</option>
+                                    <option value="+1">🇺🇸 +1 US</option>
+                                    <option value="+34">🇪🇸 +34 ES</option>
+                                    <option value="+54">🇦🇷 +54 AR</option>
+                                    <option value="+55">🇧🇷 +55 BR</option>
+                                    <option value="+56">🇨🇱 +56 CL</option>
+                                    <option value="+57">🇨🇴 +57 CO</option>
+                                    <option value="+51">🇵🇪 +51 PE</option>
+                                </select>
+                                <input type="tel" id="phone" class="phone-number" required placeholder="Ej. 5512345678">
+                            </div>
+                            <div class="whatsapp-note">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                                <span>Un asesor se comunicará contigo por este número para seguimiento personalizado</span>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="cta-button pulse">OBTENER GUÍA VIP AHORA ↓</button>
+                        
+                        <div style="text-align: center; margin: 15px 0; font-size: 14px; color: #8b2e00; font-weight: 600;">
+                            ⌛ SOLO PARA LOS PRIMEROS 20 SOLICITANTES
+                        </div>
+                    </form>
+                    
+                    <p class="privacy">
+                        🔒 Tu información está 100% segura. Solo usaremos tus datos para enviarte la guía y ofrecerte asesoría personalizada.
+                    </p>
+                </div>
             </div>
+        </div>
+        
+        <!-- Página de gracias (oculta inicialmente) -->
+        <div id="thank-you-page" class="thank-you-page">
+            <div class="thank-you-icon">✓</div>
+            <h1 style="color: #8b2e00; margin-bottom: 20px;">¡Gracias por tu interés!</h1>
+            <p class="thank-you-message">
+                Hemos enviado la <strong>Guía VIP de la Hacienda de Lujo en Mérida</strong> a tu correo electrónico.<br>
+                Un asesor especializado se comunicará contigo en breve.
+            </p>
+            <div style="margin-top: 30px;">
+                <p style="margin-bottom: 15px; font-weight: 500;">Mientras tanto, puedes:</p>
+                <a href="#" class="download-link" id="download-again">Descargar la Guía VIP</a>
+            </div>
+            <p style="margin-top: 40px; color: #777; font-size: 14px;">
+                ¿No recibiste el correo? Revisa tu carpeta de spam o <a href="#" style="color: #8b2e00; text-decoration: underline;" id="contact-support">contáctanos</a>.
+            </p>
         </div>
     </div>
 
@@ -407,6 +468,36 @@
             document.querySelector(this.getAttribute('href')).scrollIntoView({
                 behavior: 'smooth'
             });
+        });
+        
+        // Manejo del formulario
+        document.getElementById('lead-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Aquí iría la lógica para enviar los datos a tu backend/CRM
+            // Por ahora simulamos el envío exitoso
+            
+            // Ocultar el formulario y mostrar la página de gracias
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('thank-you-page').style.display = 'block';
+            
+            // Desplazarse al inicio suavemente
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Botón para descargar nuevamente
+        document.getElementById('download-again').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Enlace de descarga enviado nuevamente a tu correo');
+        });
+        
+        // Botón de contacto
+        document.getElementById('contact-support').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Por favor envía un WhatsApp al +52 1 XXX XXX XXXX para asistencia inmediata');
         });
     </script>
 </body>
