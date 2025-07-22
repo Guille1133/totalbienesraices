@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '705046695583164');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=705046695583164&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hacienda de Lujo en Mérida - Oportunidad Exclusiva</title>
@@ -463,6 +481,11 @@
             <p style="margin-top: 40px; color: #777; font-size: 14px;">
                 ¿No recibiste el correo? Revisa tu carpeta de spam o <a href="mailto:bienesraicesinversion4@gmail.com" style="color: #8b2e00; text-decoration: underline;">contáctanos</a>.
             </p>
+            
+            <!-- Dispara el evento Lead -->
+            <script>
+              fbq('track', 'Lead');
+            </script>
         </div>
     </div>
 
