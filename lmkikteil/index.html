@@ -481,11 +481,6 @@
             <p style="margin-top: 40px; color: #777; font-size: 14px;">
                 ¿No recibiste el correo? Revisa tu carpeta de spam o <a href="mailto:bienesraicesinversion4@gmail.com" style="color: #8b2e00; text-decoration: underline;">contáctanos</a>.
             </p>
-            
-            <!-- Dispara el evento Lead -->
-            <script>
-              fbq('track', 'Lead');
-            </script>
         </div>
     </div>
 
@@ -547,14 +542,14 @@
                     document.getElementById('main-content').style.display = 'none';
                     document.getElementById('thank-you-page').style.display = 'block';
                     
+                    // Disparar el evento Lead SOLO cuando se muestra la página de gracias
+                    fbq('track', 'Lead');
+                    
                     // Desplazarse al inicio suavemente
                     window.scrollTo({
                         top: 0,
                         behavior: 'smooth'
                     });
-                    
-                    // Opcional: Redirigir a URL de descarga directa
-                    // window.location.href = 'URL_DE_DESCARGA';
                 } else {
                     throw new Error('Error en la respuesta del servidor');
                 }
@@ -573,13 +568,6 @@
             e.preventDefault();
             // Aquí puedes agregar la lógica para reenviar el correo
             alert('Enlace de descarga enviado nuevamente a tu correo');
-        });
-        
-        // Botón de contacto
-        document.getElementById('contact-support').addEventListener('click', function(e) {
-            e.preventDefault();
-            // Aquí puedes agregar el contacto de soporte
-            alert('Por favor envía un WhatsApp al +52 1 XXX XXX XXXX para asistencia inmediata');
         });
     </script>
 </body>
