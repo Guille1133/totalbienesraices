@@ -464,8 +464,8 @@
     </style>
 </head>
 <body>
-    <!-- Contador de tiempo -->
-    <div class="countdown-bar">
+    <!-- Contador de tiempo (solo visible en página principal) -->
+    <div class="countdown-bar" id="countdown-bar">
         ⏳ Esta guía dejará de estar disponible en: <span class="countdown-timer" id="countdown">05:00:00</span>
     </div>
     
@@ -648,6 +648,9 @@
                     // Ocultar el formulario y mostrar la página de gracias
                     document.getElementById('main-content').style.display = 'none';
                     document.getElementById('thank-you-page').style.display = 'block';
+                    
+                    // Ocultar el contador de tiempo
+                    document.getElementById('countdown-bar').style.display = 'none';
                     
                     // Disparar el evento Lead SOLO cuando se muestra la página de gracias
                     fbq('track', 'Lead');
